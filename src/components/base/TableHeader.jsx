@@ -14,7 +14,7 @@ const TableHeader = ({ searchString, setSearchString, routeName }) => {
       </button>
       <input
         type="text"
-        className="border border-slate-400 h-[36px] pl-3 rounded w-1/4 outline-none text-sm"
+        className="border border-slate-400 h-[36px] dark:bg-slate-700 dark:text-slate-200 pl-3 rounded w-1/4 outline-none text-sm"
         placeholder="Search..."
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}

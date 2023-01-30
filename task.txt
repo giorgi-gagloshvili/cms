@@ -2,6 +2,6 @@ On shrink sidebar links should disappear ------------>
 table header ------------->
 page info slice --------------->
 lecturer update form ----------->
-handle messages
-image upload
+handle messages ------------>
+image upload 
 deploy project

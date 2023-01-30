@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { useRouter } from "next/router"
 import { wrapper } from "@/redux/store"
 import { Provider } from "react-redux"
+import { store } from "./../redux/store"
 
 function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)
@@ -16,10 +17,12 @@ function App({ Component, pageProps }) {
   }, [])
 
   return (
-    <AuthContext>
-      <LocaleContext>{getLayout(<Component {...pageProps} />)}</LocaleContext>
-    </AuthContext>
+    <Provider store={store}>
+      <AuthContext>
+        <LocaleContext>{getLayout(<Component {...pageProps} />)}</LocaleContext>
+      </AuthContext>
+    </Provider>
   )
 }
 
-export default wrapper.withRedux(App)
+export default App

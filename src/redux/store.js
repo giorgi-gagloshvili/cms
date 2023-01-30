@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
-import { createWrapper, HYDRATE } from "next-redux-wrapper"
+// import { createWrapper, HYDRATE } from "next-redux-wrapper"
 import themeSlice from "./slices/themeSlice"
 import pageDataSlice from "./slices/pageDataSlice"
 import pageInfoSlice from "./slices/pageInfoSlice"
@@ -19,4 +19,4 @@ export const makeStore = () => {
 }
 
 // export default store
-export const wrapper = createWrapper(makeStore)
+export const store = makeStore()

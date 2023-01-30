@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import Head from "next/head"
 import Layout from "@/components/layouts/Layout"
-import Modal from "@/components/base/Modal"
-import Form from "@/components/lecturer/Form"
 import Table from "@/components/base/Table"
 import { useDispatch } from "react-redux"
 import { getData } from "@/redux/slices/pageDataSlice"
@@ -46,7 +44,12 @@ export default Lecturer
 Lecturer.getLayout = (page) => <Layout>{page}</Layout>
 
 export const getStaticProps = async () => {
-  const response = await fetch("http://localhost:3000/api/lecturers")
+  const response = await fetch("http://localhost:3000/api/lecturers", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
   const result = await response.json()
 
   return {

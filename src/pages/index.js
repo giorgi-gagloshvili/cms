@@ -1,8 +1,5 @@
-import apiClient from "@/lib/apiClient"
 import Head from "next/head"
 import Layout from "@/components/layouts/Layout"
-
-// import { redirect } from "next/dist/server/api-utils"
 
 function Home({ data }) {
   return (
@@ -25,14 +22,13 @@ function Home({ data }) {
   )
 }
 
-export const getStaticProps = async (context) => {
-  const response = await apiClient().get(
-    "https://jsonplaceholder.typicode.com/users"
-  )
+export const getStaticProps = async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users")
+  const result = await response.json()
 
   return {
     props: {
-      data: response.data,
+      data: result,
     },
   }
 }
