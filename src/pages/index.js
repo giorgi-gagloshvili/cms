@@ -11,10 +11,14 @@ function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <h1 className="text-3xl text-slate-800 dark:text-slate-300 font-bold underline">
+          Hello world!
+        </h1>
         <ul>
           {data?.map((item) => (
-            <li key={item.id}>{item.name}</li>
+            <li key={item.id} className="text-slate-800 dark:text-slate-300">
+              {item.name}
+            </li>
           ))}
         </ul>
       </main>

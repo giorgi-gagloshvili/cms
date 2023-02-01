@@ -45,7 +45,7 @@ export default Students
 Students.getLayout = (page) => <Layout>{page}</Layout>
 
 export const getStaticProps = async () => {
-  const response = await fetch("http://localhost:3000/api/students", {
+  const response = await fetch(process.env.API_URI + "/students", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
