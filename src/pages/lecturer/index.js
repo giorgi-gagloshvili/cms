@@ -44,12 +44,15 @@ export default Lecturer
 Lecturer.getLayout = (page) => <Layout>{page}</Layout>
 
 export const getStaticProps = async () => {
-  const response = await fetch(process.env.API_URI + "/lecturers", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  const response = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URI + "/lecturers",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
   const result = await response.json()
 
   return {

@@ -32,7 +32,7 @@ const EditForm = ({ document, id, setOpen }) => {
     dispatch(editData(response.data))
     dispatch(
       setAlert({
-        status: "Success",
+        status: "success",
         title: "Success",
         message: "Student was updated successfuly",
         isAlert: true,

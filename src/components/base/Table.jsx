@@ -24,7 +24,7 @@ const Table = ({ columns }) => {
       dispatch(deleteData(id))
       dispatch(
         setAlert({
-          status: "Error",
+          status: "success",
           title: "Success",
           message: "Data was deleted Successfuly",
           isAlert: true,

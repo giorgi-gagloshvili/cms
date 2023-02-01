@@ -24,6 +24,7 @@ const Form = ({ setOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
+      console.log("From here to eternity")
       const response = await apiClient().post("/students", fieldData)
       console.log(response)
       dispatch(addData(response.data))
