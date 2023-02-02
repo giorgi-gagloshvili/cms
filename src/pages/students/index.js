@@ -44,7 +44,7 @@ export default Students
 
 Students.getLayout = (page) => <Layout>{page}</Layout>
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const response = await fetch(process.env.NEXT_PUBLIC_BASE_URI + "/students", {
     method: "GET",
     headers: {
