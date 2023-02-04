@@ -27,7 +27,7 @@ const Lecturer = ({ lecturers }) => {
       <Head>
         <title>Lecturer</title>
       </Head>
-      {JSON.stringify(lecturers)}
+      {/* {JSON.stringify(lecturers)} */}
       <Table
         columns={[
           "name",
