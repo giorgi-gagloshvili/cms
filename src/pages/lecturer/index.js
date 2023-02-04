@@ -10,7 +10,11 @@ const Lecturer = ({ lecturers }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getData(lecturers))
+    if (Array.isArray(lecturers)) {
+      dispatch(getData(lecturers))
+    } else {
+      dispatch(getData([]))
+    }
     dispatch(
       getInfo({
         routeName: "lecturers",
@@ -23,7 +27,7 @@ const Lecturer = ({ lecturers }) => {
       <Head>
         <title>Lecturer</title>
       </Head>
-
+      {JSON.stringify(lecturers)}
       <Table
         columns={[
           "name",
