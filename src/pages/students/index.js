@@ -9,7 +9,11 @@ import { getInfo } from "@/redux/slices/pageInfoSlice"
 const Students = ({ students }) => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getData(students))
+    if (Array.isArray(students)) {
+      dispatch(getData(students))
+    } else {
+      dispatch(getData([]))
+    }
     dispatch(
       getInfo({
         routeName: "students",
