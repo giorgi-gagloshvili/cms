@@ -13,9 +13,13 @@ const LocaleContext = ({ children }) => {
     if (locale === "en") {
       setLocale("ge")
       localStorage.setItem("locale", "ge")
+      document.documentElement.classList.remove("font-poppins")
+      document.documentElement.classList.add("font-firago")
     } else {
       setLocale("en")
       localStorage.setItem("locale", "en")
+      document.documentElement.classList.remove("font-firago")
+      document.documentElement.classList.add("font-poppins")
     }
   }
   return (

@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import langs from "@/lib/locale"
 import { MdChevronLeft } from "react-icons/md"
+
 const Sidebar = ({ shrink, setShrink }) => {
   const { locale } = useLocaleContext()
   const [activeIndex, setActiveIndex] = useState(false)
@@ -18,7 +19,7 @@ const Sidebar = ({ shrink, setShrink }) => {
         <h1
           className={`${
             shrink ? "hidden" : "block"
-          } text-slate-800 dark:text-slate-500`}
+          } text-slate-800 dark:text-slate-500 font-poppins`}
         >
           <Link href="/">Logo</Link>
         </h1>

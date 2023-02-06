@@ -28,6 +28,7 @@ const Lecturer = ({ lecturers }) => {
         <title>Lecturer</title>
       </Head>
       {/* {JSON.stringify(lecturers)} */}
+
       <Table
         columns={[
           "name",

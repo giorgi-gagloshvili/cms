@@ -5,8 +5,11 @@ import apiClient from "@/lib/apiClient"
 import { useDispatch } from "react-redux"
 import { addData } from "@/redux/slices/pageDataSlice"
 import { setAlert } from "@/redux/slices/alertSlice"
+import { useLocaleContext } from "@/context/LocaleContext"
+import langs from "@/lib/locale"
 
 const Form = ({ setOpen }) => {
+  const { locale } = useLocaleContext()
   const dispatch = useDispatch()
   const [fieldData, setFieldData] = useState({
     name: "",
@@ -92,7 +95,10 @@ const Form = ({ setOpen }) => {
         handleChange={handleChange}
         label="Score"
       />
-      <SubmitButton buttonText="Create" type="submit" />
+      <SubmitButton
+        buttonText={locale && langs[locale]["create"]}
+        type="submit"
+      />
     </form>
   )
 }

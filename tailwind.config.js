@@ -31,6 +31,10 @@ module.exports = {
         bounced: "bounced .5s ease-in-out",
         alert: "alert .7s ease-in-out",
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        firago: ["FiraGO", "sans-serif"],
+      },
     },
   },
   plugins: [],

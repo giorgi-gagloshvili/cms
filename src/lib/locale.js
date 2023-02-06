@@ -9,6 +9,10 @@ const langs = {
     logout: "Logout",
     students: "Students",
     home: "Home",
+    create: "Create",
+    delete: "Delete",
+    cancel: "Cancel",
+    edit: "Edit",
   },
   ge: {
     login: "ავტორიზაცია",
@@ -20,6 +24,10 @@ const langs = {
     logout: "გამოსვლა",
     students: "სტუდენტები",
     home: "მთავარი",
+    create: "შექმნა",
+    delete: "წაშლა",
+    cancel: "გაუქმება",
+    edit: "რედაქტირება",
   },
 }
 
