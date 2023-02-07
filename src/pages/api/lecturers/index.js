@@ -2,7 +2,7 @@ import dbConnect from "@/mongo"
 import Lecturer from "@/models/Lecturer"
 
 export default async function handler(req, res) {
-  dbConnect()
+  await dbConnect()
 
   if (req.method === "GET") {
     try {
