@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import apiClient from "@/lib/apiClient"
 
 const Context = createContext()
 
@@ -9,22 +10,26 @@ const AuthContext = ({ children }) => {
   const [token, setToken] = useState("")
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
-      setToken(localStorage.getItem("token"))
+    if (localStorage.getItem("user") !== null) {
+      setToken(JSON.parse(localStorage.getItem("user")))
     }
   }, [])
 
   const handleAuth = (data) => {
     console.log(data)
     setUser(data)
-    localStorage.setItem("token", "s98asd98zsdsdf")
+    localStorage.setItem("user", JSON.stringify(data))
 
     // localStorage.removeItem("token")
   }
-  const handleLogout = () => {
-    localStorage.removeItem("token")
-    setToken("")
-    router.push("/login")
+  const handleLogout = async () => {
+    try {
+      const response = await apiClient().get("/logout")
+      localStorage.removeItem("user")
+      router.push("/login")
+    } catch (err) {
+      console.log(err)
+    }
   }
   return (
     <Context.Provider value={{ user, token, handleAuth, handleLogout }}>

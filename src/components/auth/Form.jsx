@@ -1,8 +1,9 @@
-import TextField from "./../base/TextField"
-import SubmitButton from "./../base/SubmitButton"
+import TextField from "../base/TextField"
+import SubmitButton from "../base/SubmitButton"
 import { useState } from "react"
-import apiClient from "./../../lib/apiClient"
+import apiClient from "../../lib/apiClient"
 import { useRouter } from "next/router"
+import Link from "next/link"
 import { useAuthContext } from "../../context/AuthContext"
 
 const Form = () => {
@@ -49,7 +50,15 @@ const Form = () => {
         handleChange={handleChange}
         label="Password"
       />
-      <SubmitButton buttonText={"Login"} type="submit" />
+      <div className="flex items-center justify-between">
+        <SubmitButton buttonText={"Login"} type="submit" />
+        <Link
+          href="/register"
+          className="text-sm text-slate-800 dark:text-slate-200"
+        >
+          Sign up
+        </Link>
+      </div>{" "}
     </form>
   )
 }

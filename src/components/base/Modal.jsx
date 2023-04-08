@@ -24,14 +24,14 @@ const Modal = ({ children, open, setOpen, title, size }) => {
       left-0 
       bg-gray-400/50 
       dark:bg-gray-800/50
-      z-3 
+      z-20
       justify-center 
       items-center`}
     >
       <div
         className={`${open && "animate-bounced"} ${
           size === "sm" ? "w-full md:w-1/3" : "w-full md:w-3/4 lg:w-1/2"
-        } rounded relative z-10 border dark:border-slate-600 bg-white dark:bg-gray-800 p-4`}
+        } overflow-y-auto my-2 rounded relative z-10 border dark:border-slate-600 bg-white dark:bg-gray-800 p-4`}
       >
         <CircleButton position="absolute">
           <MdClose

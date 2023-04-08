@@ -4,6 +4,7 @@ const apiClient = () => {
   return axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URI,
     headers: {},
+    withCredentials: true,
   })
 }
 

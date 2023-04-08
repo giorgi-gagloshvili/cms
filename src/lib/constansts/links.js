@@ -10,14 +10,20 @@ export const links = [
   },
   {
     id: 2,
-    url: "/lecturer",
-    name: "lecturer",
+    url: "/lecturers",
+    name: "lecturers",
     icon: <IoPersonOutline />,
   },
   {
     id: 3,
     url: "/students",
     name: "students",
+    icon: <IoPeopleOutline />,
+  },
+  {
+    id: 4,
+    url: "/degrees",
+    name: "degrees",
     icon: <IoPeopleOutline />,
   },
 ]

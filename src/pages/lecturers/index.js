@@ -1,17 +1,19 @@
 import { useEffect } from "react"
-import Head from "next/head"
 import Layout from "@/components/layouts/Layout"
-import Table from "@/components/base/Table"
+import Table from "@/components/table/Table"
 import { useDispatch } from "react-redux"
 import { getData } from "@/redux/slices/pageDataSlice"
+import { getRelations } from "@/redux/slices/relationSlice"
 import { getInfo } from "@/redux/slices/pageInfoSlice"
+// import { redirect } from "next/dist/server/api-utils"
 
-const Lecturer = ({ lecturers }) => {
+const Lecturer = ({ lecturers, degrees }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (Array.isArray(lecturers)) {
       dispatch(getData(lecturers))
+      dispatch(getRelations({ degrees }))
     } else {
       dispatch(getData([]))
     }
@@ -19,27 +21,21 @@ const Lecturer = ({ lecturers }) => {
       getInfo({
         routeName: "lecturers",
         modalTitle: "Lecturer",
-      })
-    )
-  }, [])
-  return (
-    <>
-      <Head>
-        <title>Lecturer</title>
-      </Head>
-      {/* {JSON.stringify(lecturers)} */}
-
-      <Table
-        columns={[
+        columns: [
           "name",
+          "image",
           "email",
           "dateOfBirth",
           "position",
           "degree",
           "score",
-          "action",
-        ]}
-      />
+        ],
+      })
+    )
+  }, [])
+  return (
+    <>
+      <Table />
     </>
   )
 }
@@ -48,7 +44,16 @@ export default Lecturer
 
 Lecturer.getLayout = (page) => <Layout>{page}</Layout>
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
+  // console.log(context.req.headers.cookie)
+  if (!context.req.headers.cookie) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    }
+  }
   const response = await fetch(
     process.env.NEXT_PUBLIC_BASE_URI + "/lecturers",
     {
@@ -60,9 +65,22 @@ export const getServerSideProps = async () => {
   )
   const result = await response.json()
 
+  const degreesResponse = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URI + "/degrees",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+
+  const degreesResult = await degreesResponse.json()
+
   return {
     props: {
       lecturers: result,
+      degrees: degreesResult,
     },
   }
 }

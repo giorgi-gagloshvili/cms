@@ -1,7 +1,6 @@
 import { useEffect } from "react"
-import Head from "next/head"
 import Layout from "@/components/layouts/Layout"
-import Table from "@/components/base/Table"
+import Table from "@/components/table/Table"
 import { useDispatch } from "react-redux"
 import { getData } from "@/redux/slices/pageDataSlice"
 import { getInfo } from "@/redux/slices/pageInfoSlice"
@@ -18,25 +17,20 @@ const Students = ({ students }) => {
       getInfo({
         routeName: "students",
         modalTitle: "Student",
-      })
-    )
-  }, [])
-  return (
-    <>
-      <Head>
-        <title>Students</title>
-      </Head>
-      <Table
-        columns={[
+        columns: [
           "name",
           "email",
           "dateOfBirth",
           "score",
           "isEmployee",
           "occupation",
-          "action",
-        ]}
-      />
+        ],
+      })
+    )
+  }, [])
+  return (
+    <>
+      <Table />
       {/* <Modal open={open} setOpen={setOpen} title="Add Student ">
         <Form setOpen={setOpen} />
       </Modal> */}
@@ -48,7 +42,15 @@ export default Students
 
 Students.getLayout = (page) => <Layout>{page}</Layout>
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
+  if (!context.req.headers.cookie) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    }
+  }
   const response = await fetch(process.env.NEXT_PUBLIC_BASE_URI + "/students", {
     method: "GET",
     headers: {

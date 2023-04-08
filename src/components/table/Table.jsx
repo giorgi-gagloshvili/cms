@@ -1,14 +1,15 @@
-import StudentRow from "../student/StudentRow"
+import StudentRow from "./StudentRow"
+import TableRow from "@/components/table/TableRow"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteData } from "@/redux/slices/pageDataSlice"
 import apiClient from "@/lib/apiClient"
-import Modal from "./Modal"
+import Modal from "../base/Modal"
 import TableHeader from "@/components/base/TableHeader"
 import EditFormWrapper from "@/components/base/EditFormWrapper"
 import { setAlert } from "@/redux/slices/alertSlice"
 
-const Table = ({ columns }) => {
+const Table = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [searchString, setSearchString] = useState("")
@@ -16,7 +17,8 @@ const Table = ({ columns }) => {
   const [document, setDocument] = useState({})
   const [id, setId] = useState(null)
   const students = useSelector((state) => state.pageData.data)
-  const { routeName } = useSelector((state) => state.pageInfo.pageInfo)
+  const { routeName, columns } = useSelector((state) => state.pageInfo.pageInfo)
+
   const handleDelete = async (id) => {
     try {
       const response = await apiClient().delete(`/${routeName}/${id}`)
@@ -73,15 +75,18 @@ const Table = ({ columns }) => {
                   {item[0].toUpperCase() + "" + item.slice(1)}
                 </th>
               ))}
+              <th className="p-2 text-left bg-gray-100 w-11 dark:bg-slate-700 text-slate-800 dark:text-slate-200 border text-sm border-slate-300">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
             {hadnleFilteredData()?.map((item) => (
-              <StudentRow
-                data={item}
-                handler={handleModal}
-                columns={columns}
+              <TableRow
                 key={item._id}
+                data={item}
+                routeName={routeName}
+                handler={handleModal}
               />
             ))}
           </tbody>

@@ -1,13 +1,24 @@
 import { links } from "@/lib/constansts/links"
 import { useLocaleContext } from "@/context/LocaleContext"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import Link from "next/link"
 import langs from "@/lib/locale"
 import { MdChevronLeft } from "react-icons/md"
 
 const Sidebar = ({ shrink, setShrink }) => {
   const { locale } = useLocaleContext()
-  const [activeIndex, setActiveIndex] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(null)
+  const { routeName } = useSelector((state) => state.pageInfo.pageInfo)
+
+  useEffect(() => {
+    if (routeName) {
+      const filterActive = links.find((item) => item.name === routeName)
+      console.log(filterActive, routeName)
+      setActiveIndex(filterActive.id)
+    }
+  }, [routeName])
+
   return (
     <aside
       className={`border-r border-slate-300 dark:border-slate-600 h-screen fixed transition-all bg-white

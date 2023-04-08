@@ -5,7 +5,7 @@ const langs = {
     password: "Password",
     submit: "Submit",
     student: "Student",
-    lecturer: "Lecturer",
+    lecturers: "Lecturer",
     logout: "Logout",
     students: "Students",
     home: "Home",
@@ -13,6 +13,7 @@ const langs = {
     delete: "Delete",
     cancel: "Cancel",
     edit: "Edit",
+    degrees: "Degrees",
   },
   ge: {
     login: "ავტორიზაცია",
@@ -20,7 +21,7 @@ const langs = {
     password: "პაროლი",
     submit: "გაგზავნა",
     student: "სტუდენტი",
-    lecturer: "ლექტორი",
+    lecturers: "ლექტორი",
     logout: "გამოსვლა",
     students: "სტუდენტები",
     home: "მთავარი",
@@ -28,6 +29,7 @@ const langs = {
     delete: "წაშლა",
     cancel: "გაუქმება",
     edit: "რედაქტირება",
+    degrees: "ხარისხი",
   },
 }
 

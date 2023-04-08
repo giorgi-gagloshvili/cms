@@ -1,16 +1,16 @@
 import AuthLayout from "../../components/layouts/AuthLayout"
-import Form from "../../components/auth/Form"
-const Login = () => {
+import RegisterForm from "../../components/auth/RegisterForm"
+const Register = () => {
   return (
     <>
-      <Form />
+      <RegisterForm />
     </>
   )
 }
 
-export default Login
+export default Register
 
-Login.getLayout = (page) => <AuthLayout>{page}</AuthLayout>
+Register.getLayout = (page) => <AuthLayout>{page}</AuthLayout>
 
 export const getServerSideProps = async ({ req }) => {
   if (req.headers.cookie) {

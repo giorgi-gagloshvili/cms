@@ -2,9 +2,12 @@ import { useEffect, useState } from "react"
 import SubmitButton from "../base/SubmitButton"
 import TextField from "../base/TextField"
 import apiClient from "@/lib/apiClient"
+import DateField from "../base/DateField"
 import { useDispatch } from "react-redux"
 import { editData } from "@/redux/slices/pageDataSlice"
 import { setAlert } from "@/redux/slices/alertSlice"
+import CheckField from "../base/CheckField"
+import { dateFactory } from "@/lib/helpers/dateFactory"
 
 const EditForm = ({ document, id, setOpen }) => {
   const dispatch = useDispatch()
@@ -13,20 +16,41 @@ const EditForm = ({ document, id, setOpen }) => {
     email: "",
     dateOfBirth: "",
     occupation: "",
-    isEmployeed: false,
+    isEmployee: false,
     score: "",
   })
 
   useEffect(() => {
-    setFieldData(document)
+    const dateOfBirth = document.dateOfBirth
+      ? new Date(document.dateOfBirth.split("-").reverse().join("-"))
+      : null
+    console.log(document.dateOfBirth, dateOfBirth)
+    setFieldData({ ...document, dateOfBirth })
   }, [document])
 
   const handleChange = (e) => {
-    setFieldData({ ...fieldData, [e.target.name]: e.target.value })
+    if (e.target.type === "checkbox") {
+      if (e.target.checked) {
+        setFieldData({ ...fieldData, [e.target.name]: true })
+      } else {
+        setFieldData({ ...fieldData, [e.target.name]: false })
+      }
+    } else {
+      setFieldData({ ...fieldData, [e.target.name]: e.target.value })
+    }
   }
+
+  const handleDate = (date, name) => {
+    setFieldData({ ...fieldData, [name]: date })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await apiClient().put(`/students/${id}`, fieldData)
+    const dateOfBirth = dateFactory(fieldData.dateOfBirth)
+    const response = await apiClient().put(`/students/${id}`, {
+      ...fieldData,
+      dateOfBirth,
+    })
     dispatch(editData(response.data))
     dispatch(
       setAlert({
@@ -56,15 +80,21 @@ const EditForm = ({ document, id, setOpen }) => {
         handleChange={handleChange}
         label="Email"
       />
-      <TextField
-        type="text"
+
+      <DateField
         placeholder="Enter date of birth"
         name="dateOfBirth"
         value={fieldData.dateOfBirth}
-        handleChange={handleChange}
+        handler={handleDate}
         label="Date of birth"
       />
-
+      <CheckField
+        type="checkbox"
+        label="employee"
+        handleChange={handleChange}
+        name="isEmployee"
+        value={fieldData.isEmployee}
+      />
       <TextField
         type="text"
         placeholder="Occupation"
