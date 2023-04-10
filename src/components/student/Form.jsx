@@ -25,6 +25,7 @@ const Form = ({ setOpen }) => {
 
   const handleChange = async (e) => {
     if (e.target.type === "checkbox") {
+      console.log("Checked")
       if (e.target.checked) {
         setFieldData({ ...fieldData, [e.target.name]: true })
       } else {
@@ -98,7 +99,7 @@ const Form = ({ setOpen }) => {
       />
       <CheckField
         type="checkbox"
-        label="employee"
+        label="Employee"
         handleChange={handleChange}
         name="isEmployee"
         value={fieldData.isEmployee}

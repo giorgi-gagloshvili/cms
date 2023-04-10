@@ -30,6 +30,7 @@ const EditForm = ({ document, id, setOpen }) => {
 
   const handleChange = (e) => {
     if (e.target.type === "checkbox") {
+      console.log("Checked")
       if (e.target.checked) {
         setFieldData({ ...fieldData, [e.target.name]: true })
       } else {
@@ -64,6 +65,7 @@ const EditForm = ({ document, id, setOpen }) => {
   }
   return (
     <form onSubmit={handleSubmit}>
+      {JSON.stringify(fieldData)}
       <TextField
         type="text"
         placeholder="Enter name"

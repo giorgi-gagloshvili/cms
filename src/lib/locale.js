@@ -14,6 +14,7 @@ const langs = {
     cancel: "Cancel",
     edit: "Edit",
     degrees: "Degrees",
+    filter: "Filter",
   },
   ge: {
     login: "ავტორიზაცია",
@@ -30,6 +31,7 @@ const langs = {
     cancel: "გაუქმება",
     edit: "რედაქტირება",
     degrees: "ხარისხი",
+    filter: "ფილტრი",
   },
 }
 

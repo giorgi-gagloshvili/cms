@@ -32,10 +32,9 @@ const Header = ({ shrink }) => {
       border-b
       dark:border-slate-700
       top-0 
-      bg-white
       border-slate-300 shadow
       dark:bg-gray-800
-      z-index-2 
+      z-20	 
       h-16 
       px-8 
       items-center 

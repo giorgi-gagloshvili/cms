@@ -30,11 +30,18 @@ module.exports = {
           "0%": { opacity: 0, transform: "translateY(20px)" },
           "100%": { opacity: 1, transform: "translateY(0px)" },
         },
+        loaderScale: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.8)" },
+        },
       },
       animation: {
         bounced: "bounced .5s ease-in-out",
         alert: "alert .7s ease-in-out",
         tableInit: "tableInit .5s ease-in-out .4s forwards",
+        loaderScaleOne: "loaderScale .6s ease-in-out 0s infinite alternate",
+        loaderScaleTwo: "loaderScale .6s ease-in-out .2s infinite alternate",
+        loaderScaleThree: "loaderScale .6s ease-in-out .4s infinite alternate",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

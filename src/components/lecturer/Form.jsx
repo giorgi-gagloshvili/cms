@@ -19,12 +19,13 @@ const Form = ({ setOpen }) => {
   const dispatch = useDispatch()
   const { degrees } = useSelector((state) => state.relations.relations)
   const [previewImage, setPreviewImage] = useState(null)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [fieldData, setFieldData] = useState({
     name: "",
     email: "",
     dateOfBirth: "",
     position: "",
-    degree: "",
+    degrees: "",
     score: "",
     image: "",
   })
@@ -69,6 +70,7 @@ const Form = ({ setOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitted(true)
     const dateOfBirth = dateFactory(fieldData.dateOfBirth)
     const fd = new FormData()
     fd.append("file", fieldData.image)
@@ -85,6 +87,7 @@ const Form = ({ setOpen }) => {
         image: imageResponse.data.url,
       })
       console.log(response)
+      setIsSubmitted(false)
       dispatch(addData(response.data))
       dispatch(
         setAlert({
@@ -101,10 +104,11 @@ const Form = ({ setOpen }) => {
         email: "",
         dateOfBirth: "",
         position: "",
-        degree: "",
+        degrees: "",
         score: "",
       })
     } catch (err) {
+      setIsSubmitted(false)
       console.log(err, "Response data")
     }
   }
@@ -144,11 +148,11 @@ const Form = ({ setOpen }) => {
         label="position"
       />
       <SelectField
-        name="degree"
-        value={fieldData.degree}
+        name="degrees"
+        value={fieldData.degrees}
         handleChange={handleChange}
-        label="degree"
-        data={degrees}
+        label="Degree"
+        data={degrees.options}
       />
       <TextField
         type="text"
@@ -192,7 +196,9 @@ const Form = ({ setOpen }) => {
       </div>
       <SubmitButton
         buttonText={locale && langs[locale]["create"]}
+        width="120px"
         type="submit"
+        isSubmitted={isSubmitted}
       />
     </form>
   )

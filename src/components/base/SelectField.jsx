@@ -14,9 +14,13 @@ const SelectField = ({ name, label, data, value, handleChange }) => {
         value={value}
         onChange={handleChange}
       >
-        <option value="">Choose item...</option>
+        <option value="" key="asda">
+          Choose item...
+        </option>
         {data.map((item) => (
-          <option key={item.id}>{item.name}</option>
+          <option key={item._id} value={item._id}>
+            {item.name}
+          </option>
         ))}
       </select>
     </div>

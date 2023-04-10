@@ -11,3 +11,11 @@
   font-family: "firago";
   src: url("/fonts/FiraGO-Regular.otf");
 }
+
+input:checked + div {
+  background: #0284c7;
+}
+input:checked + div div {
+  transform: translateX(105%);
+  background: #fff;
+}

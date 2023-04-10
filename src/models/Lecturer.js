@@ -13,7 +13,7 @@ const lecturerSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  degree: {
+  degrees: {
     type: String,
     required: true,
   },

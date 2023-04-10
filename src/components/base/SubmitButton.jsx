@@ -1,10 +1,12 @@
-const SubmitButton = ({ buttonText, type }) => {
+import ButtonLoader from "./ButtonLoader"
+const SubmitButton = ({ buttonText, isSubmitted, type, width }) => {
   return (
     <button
       type={type}
-      className="h-8 px-8 border outline-none bg-sky-600 hover:bg-sky-700 rounded text-white"
+      style={{ width }}
+      className={`h-9 border outline-none bg-sky-600 hover:bg-sky-700 rounded text-white`}
     >
-      {buttonText || "Button"}
+      {isSubmitted ? <ButtonLoader /> : buttonText || "Button"}
     </button>
   )
 }

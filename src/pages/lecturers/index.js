@@ -27,7 +27,7 @@ const Lecturer = ({ lecturers, degrees }) => {
           "email",
           "dateOfBirth",
           "position",
-          "degree",
+          "degrees",
           "score",
         ],
       })
@@ -80,7 +80,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       lecturers: result,
-      degrees: degreesResult,
+      degrees: { name: "degrees", options: degreesResult, type: "select" },
     },
   }
 }
