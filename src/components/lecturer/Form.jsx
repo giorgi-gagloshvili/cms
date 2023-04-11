@@ -197,8 +197,8 @@ const Form = ({ setOpen }) => {
       <SubmitButton
         buttonText={locale && langs[locale]["create"]}
         width="120px"
-        type="submit"
         isSubmitted={isSubmitted}
+        type="submit"
       />
     </form>
   )

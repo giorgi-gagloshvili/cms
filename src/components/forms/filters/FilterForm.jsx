@@ -73,7 +73,7 @@ const FilterForm = ({ setOpen }) => {
       <SubmitButton
         width="120px"
         isSubmitted={isSubmitted}
-        buttonText={locale && langs[locale]["create"]}
+        buttonText={locale && langs[locale]["filter"]}
         type="submit"
       />
     </form>

@@ -11,6 +11,8 @@ import langs from "@/lib/locale"
 const DegreesForm = ({ setOpen }) => {
   const { locale } = useLocaleContext()
   const dispatch = useDispatch()
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [fieldData, setFieldData] = useState({
     name: "",
   })
@@ -21,6 +23,7 @@ const DegreesForm = ({ setOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitted(true)
 
     try {
       const response = await apiClient().post("/degrees", fieldData)
@@ -38,7 +41,9 @@ const DegreesForm = ({ setOpen }) => {
           isAlert: true,
         })
       )
+      setIsSubmitted(false)
     } catch (err) {
+      setIsSubmitted(false)
       console.log(err, "Response data")
     }
   }
@@ -56,6 +61,8 @@ const DegreesForm = ({ setOpen }) => {
       <SubmitButton
         buttonText={locale && langs[locale]["create"]}
         type="submit"
+        isSubmitted={isSubmitted}
+        width="120px"
       />
     </form>
   )

@@ -14,6 +14,7 @@ import langs from "@/lib/locale"
 const Form = ({ setOpen }) => {
   const { locale } = useLocaleContext()
   const dispatch = useDispatch()
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [fieldData, setFieldData] = useState({
     name: "",
     email: "",
@@ -42,6 +43,7 @@ const Form = ({ setOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitted(true)
     const dateOfBirth = dateFactory(fieldData.dateOfBirth)
 
     try {
@@ -50,6 +52,7 @@ const Form = ({ setOpen }) => {
         dateOfBirth,
       })
       console.log(response)
+      setIsSubmitted(false)
       dispatch(addData(response.data))
       setOpen(false)
       setFieldData({
@@ -69,6 +72,7 @@ const Form = ({ setOpen }) => {
         })
       )
     } catch (err) {
+      setIsSubmitted(false)
       console.log(err, "Response data")
     }
   }
@@ -123,6 +127,8 @@ const Form = ({ setOpen }) => {
       <SubmitButton
         buttonText={locale && langs[locale]["create"]}
         type="submit"
+        width="120px"
+        isSubmitted={isSubmitted}
       />
     </form>
   )

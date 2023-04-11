@@ -4,7 +4,7 @@ const SubmitButton = ({ buttonText, isSubmitted, type, width }) => {
     <button
       type={type}
       style={{ width }}
-      className={`h-9 border outline-none bg-sky-600 hover:bg-sky-700 rounded text-white`}
+      className={`h-9 border outline-none bg-sky-600 hover:bg-sky-700 rounded text-sm text-white`}
     >
       {isSubmitted ? <ButtonLoader /> : buttonText || "Button"}
     </button>

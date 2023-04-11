@@ -8,9 +8,14 @@ import { editData } from "@/redux/slices/pageDataSlice"
 import { setAlert } from "@/redux/slices/alertSlice"
 import CheckField from "../base/CheckField"
 import { dateFactory } from "@/lib/helpers/dateFactory"
+import { useLocaleContext } from "@/context/LocaleContext"
+import langs from "@/lib/locale"
 
 const EditForm = ({ document, id, setOpen }) => {
   const dispatch = useDispatch()
+  const { locale } = useLocaleContext()
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [fieldData, setFieldData] = useState({
     name: "",
     email: "",
@@ -47,25 +52,31 @@ const EditForm = ({ document, id, setOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const dateOfBirth = dateFactory(fieldData.dateOfBirth)
-    const response = await apiClient().put(`/students/${id}`, {
-      ...fieldData,
-      dateOfBirth,
-    })
-    dispatch(editData(response.data))
-    dispatch(
-      setAlert({
-        status: "success",
-        title: "Success",
-        message: "Student was updated successfuly",
-        isAlert: true,
+    setIsSubmitted(true)
+
+    try {
+      const dateOfBirth = dateFactory(fieldData.dateOfBirth)
+      const response = await apiClient().put(`/students/${id}`, {
+        ...fieldData,
+        dateOfBirth,
       })
-    )
-    setOpen(false)
+      setIsSubmitted(false)
+      dispatch(editData(response.data))
+      dispatch(
+        setAlert({
+          status: "success",
+          title: "Success",
+          message: "Student was updated successfuly",
+          isAlert: true,
+        })
+      )
+      setOpen(false)
+    } catch (err) {
+      setIsSubmitted(false)
+    }
   }
   return (
     <form onSubmit={handleSubmit}>
-      {JSON.stringify(fieldData)}
       <TextField
         type="text"
         placeholder="Enter name"
@@ -113,7 +124,12 @@ const EditForm = ({ document, id, setOpen }) => {
         handleChange={handleChange}
         label="Score"
       />
-      <SubmitButton buttonText="Edit" type="submit" />
+      <SubmitButton
+        buttonText={locale && langs[locale]["edit"]}
+        type="submit"
+        isSubmitted={isSubmitted}
+        width="140px"
+      />
     </form>
   )
 }

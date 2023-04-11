@@ -5,9 +5,13 @@ import apiClient from "@/lib/apiClient"
 import { useDispatch } from "react-redux"
 import { editData } from "@/redux/slices/pageDataSlice"
 import { setAlert } from "@/redux/slices/alertSlice"
+import { useLocaleContext } from "@/context/LocaleContext"
+import langs from "@/lib/locale"
 
 const EditForm = ({ document, id, setOpen }) => {
+  const { locale } = useLocaleContext()
   const dispatch = useDispatch()
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [fieldData, setFieldData] = useState({
     name: "",
     email: "",
@@ -26,19 +30,23 @@ const EditForm = ({ document, id, setOpen }) => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("handle this fuckin submit")
-    const response = await apiClient().put(`/lecturers/${id}`, fieldData)
-    console.log(response, "My Fucking response")
-    dispatch(editData(response.data))
-    dispatch(
-      setAlert({
-        status: "success",
-        title: "Success",
-        message: "Student was updated successfuly",
-        isAlert: true,
-      })
-    )
-    setOpen(false)
+    setIsSubmitted(true)
+    try {
+      const response = await apiClient().put(`/lecturers/${id}`, fieldData)
+      setIsSubmitted(false)
+      dispatch(editData(response.data))
+      dispatch(
+        setAlert({
+          status: "success",
+          title: "Success",
+          message: "Student was updated successfuly",
+          isAlert: true,
+        })
+      )
+      setOpen(false)
+    } catch (err) {
+      setIsSubmitted(false)
+    }
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -91,7 +99,12 @@ const EditForm = ({ document, id, setOpen }) => {
         handleChange={handleChange}
         label="Score"
       />
-      <SubmitButton buttonText="Edit" type="submit" />
+      <SubmitButton
+        buttonText={locale && langs[locale]["edit"]}
+        isSubmitted={isSubmitted}
+        width="140px"
+        type="submit"
+      />
     </form>
   )
 }

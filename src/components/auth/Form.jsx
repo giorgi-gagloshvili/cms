@@ -5,10 +5,15 @@ import apiClient from "../../lib/apiClient"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import { useAuthContext } from "../../context/AuthContext"
+import langs from "@/lib/locale"
+import { useLocaleContext } from "@/context/LocaleContext"
 
 const Form = () => {
   const router = useRouter()
+  const { locale } = useLocaleContext()
   const { token, handleAuth } = useAuthContext()
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [fieldData, setFieldData] = useState({
     email: "",
     password: "",
@@ -20,12 +25,16 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitted(true)
+
     try {
       const response = await apiClient().post("/login", fieldData)
       console.log(response)
       handleAuth(response.data)
+      setIsSubmitted(false)
       router.push("/")
     } catch (err) {
+      setIsSubmitted(false)
       console.log(err.response.data, "Response data")
     }
   }
@@ -51,7 +60,12 @@ const Form = () => {
         label="Password"
       />
       <div className="flex items-center justify-between">
-        <SubmitButton buttonText={"Login"} type="submit" />
+        <SubmitButton
+          buttonText={locale && langs[locale]["login"]}
+          type="submit"
+          width="120px"
+          isSubmitted={isSubmitted}
+        />
         <Link
           href="/register"
           className="text-sm text-slate-800 dark:text-slate-200"

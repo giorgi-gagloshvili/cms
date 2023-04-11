@@ -7,10 +7,10 @@ const LecturerRow = ({ data, columns }) => {
     <>
       {columns.map((th, index) =>
         th === "image" ? (
-          <td className="w-[65px] p-1 relative" key={index}>
+          <td className="w-[65px] border border-slate-300 relative" key={index}>
             <img
               src={data[th]}
-              className="w-full h-full absolute top-0 left-0 object-cover"
+              className="w-full h-full p-1 absolute top-0 left-0 object-cover"
               alt="image/png"
             />
           </td>
