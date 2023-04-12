@@ -1,5 +1,6 @@
 import { RiHome2Line } from "react-icons/ri"
 import { IoPersonOutline, IoPeopleOutline } from "react-icons/io5"
+import { MdOutlineAlignVerticalBottom } from "react-icons/md"
 
 export const links = [
   {
@@ -24,6 +25,6 @@ export const links = [
     id: 4,
     url: "/degrees",
     name: "degrees",
-    icon: <IoPeopleOutline />,
+    icon: <MdOutlineAlignVerticalBottom />,
   },
 ]

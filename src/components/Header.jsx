@@ -42,7 +42,7 @@ const Header = ({ shrink }) => {
   `}
     >
       <ul className="ml-auto flex gap-4">
-        <li onClick={() => dispatch(setTheme())}>
+        <li className="flex items-center" onClick={() => dispatch(setTheme())}>
           {darkMode ? (
             <MdOutlineDarkMode
               size={22}
@@ -68,7 +68,7 @@ const Header = ({ shrink }) => {
           </span>
         </li>
         <li
-          className="cursor-pointer text-slate-600 dark:text-slate-500"
+          className="cursor-pointer text-slate-600 border py-[6px] px-4 rounded-full shadow text-sm dark:text-slate-400"
           onClick={handleLogout}
         >
           {locale && langs[locale]["logout"]}

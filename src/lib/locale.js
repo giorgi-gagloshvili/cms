@@ -15,6 +15,7 @@ const langs = {
     edit: "Edit",
     degrees: "Degrees",
     filter: "Filter",
+    no_data: "No Data to Display",
   },
   ge: {
     login: "ავტორიზაცია",
@@ -32,6 +33,7 @@ const langs = {
     edit: "რედაქტირება",
     degrees: "ხარისხი",
     filter: "ფილტრი",
+    no_data: "მონაცემები არ მოიძებნა",
   },
 }
 

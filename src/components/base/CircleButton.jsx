@@ -14,7 +14,6 @@ const CircleButton = ({ children, position }) => {
       overflow-hidden	
       before:transition-all
       before:duration-200
-      right-2
       before:content-[''] before:rounded-full before:-z-10 
       before:block	before:absolute before:top-0 before:left-0 
       before:w-full before:scale-0 before:h-full before:bg-gray-200 before:dark:bg-gray-700
